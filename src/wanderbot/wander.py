@@ -42,7 +42,13 @@ while not rospy.is_shutdown():
     print "lin %0.1f, ang %0.1f" % (twist.linear.x, twist.angular.z)
     cmd_vel_pub.publish(twist)
 
-    rate.sleep()
+    try:
+        rate.sleep()
+    except rospy.exceptions.ROSInterruptException:
+        break
+
+print "done"
+
 
 
 
